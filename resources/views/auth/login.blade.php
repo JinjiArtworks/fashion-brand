@@ -3,7 +3,7 @@
     <x-auth-card>
         <x-slot name="logo">
         </x-slot>
-        <h2 class="text-2xl uppercase font-medium mb-1">Login</h2>
+        <h2 class="text-2xl uppercase font-medium mb-1">Loginssss</h2>
         <div class="contain">
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
