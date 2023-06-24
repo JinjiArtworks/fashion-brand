@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Jenis extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
-    public function order()
+    protected $table = 'jenis';
+    public function product()
     {
-        return $this->belongsTo(Order::class);
+        return $this->hasMany(Product::class);
     }
     // foreign key yang dititipkan pada tabel, akan menggunakan relasi belongsTo. Sedangkan tabel utama yang menitipkan, di modelsnya menggunakan relasi hasMany / hasOne!!!!
 }

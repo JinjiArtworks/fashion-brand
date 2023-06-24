@@ -25,24 +25,25 @@
             <i class="fa-solid fa-chevron-right"></i>
         </span>
     </div>
-    <!-- ./breadcrumb -->
-    <!-- shop wrapper -->
-    <div class="container pb-16 ">
+    <div class="container pb-16  ">
         <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6 mt-10">Produk Kami</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             @foreach ($products as $item)
                 <div class="bg-white shadow rounded overflow-hidden group">
                     <div class="relative">
-                        <img src="assets/images/products/product1.jpg" alt="product 1" class="w-full">
+                        <a href="/detail-product/{{ $item->id }}">
+                            <img src="assets/images/products/product1.jpg" alt="product 1" class="w-full">
+                        </a>
                     </div>
                     <div class="pt-4 pb-3 px-4">
-                        <a href="#">
+                        <a href="/detail-product/{{ $item->id }}">
                             <h4 class=" font-medium text-xl text-gray-800 hover:text-primary transition">
-                                {{ $item->name }}</h4>
+                                {{ $item->name }} - {{ $item->brand }}</h4>
                         </a>
-                        <p class="text-sm text-gray-500 transition  mb-3">{{ $item->description }}
+                        <p class="text-sm text-gray-500 transition  mb-3">{{ $item->categories->name }}
                             <br>
                             <small>Stock : {{ $item->stock }} pcs</small>
+                            <small>Tipe : {{ $item->tipe->name }} </small>
                         </p>
                         <div class="flex items-baseline mb-1 space-x-2">
                             <p class="text-xl text-primary font-semibold">@currency($item->price)</p>

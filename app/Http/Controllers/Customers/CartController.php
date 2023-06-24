@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Customers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +17,36 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::all(); // already declated a has many from categories, its mean it is beloangsto categories
-        // return dd($products);
-        return view('customer.dashboard', compact('products'));
+        $user = Auth::user()->id;
+        $cart = session()->get('cart');
+        return view('customer.cart', compact('cart'));
     }
-
+    public function addCart(Request $request, $id)
+    {
+        $product = Product::find($id);
+        // return dd($product->dimension);
+        $cart = session()->get('cart');
+        if (!isset($cart[$id])) {
+            // Cart ada isi nya
+            $cart[$id] = [
+                "id" => $product->id,
+                "name" => $product->name,
+                "price" => $product->price,
+                "categories" => $product->categories,
+                "dimension" => $product->dimension,
+                "tipe" => $product->tipe->name,
+                "jenis" => $product->jenis->name,
+                "image" => $product->image,
+                "quantity" => $request->post('quantity'),
+                "total_after_disc" => $product->price  * $request->post('quantity')
+            ];
+        } else {
+            $cart[$id]["quantity"] += $request->post('quantity');
+            $cart[$id]["total_after_disc"] += $request->post('quantity') * $product->price;
+        }
+        session()->put('cart', $cart);
+        return redirect('/cart')->with('success', 'Produk berhasil ditambahkan kedalam keranjang');
+    }
     /**
      * Show the form for creating a new resource.
      *

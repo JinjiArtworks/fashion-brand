@@ -2,40 +2,32 @@
 
 namespace App\Http\Controllers\Customers;
 
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Product;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $products = Product::all();
         // return dd($products);
         return view('customer.shop', compact('products'));
     }
+    public function detail($id)
+    {
+        $products = Product::find($id);
+        // return dd($products->name);
+        return view('customer.detail-product', compact('products'));
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //

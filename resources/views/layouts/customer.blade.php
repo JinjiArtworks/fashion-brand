@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fashion Brand</title>
     <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/cust.css">
+    <link rel="stylesheet" href="{{ asset('css/cust.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,7 +15,6 @@
         rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/6.5.95/css/materialdesignicons.min.css" />
-
 </head>
 
 <body>
@@ -25,11 +24,37 @@
                 <div class="flex items-center space-x-6 capitalize">
                     <a href="/" class="text-gray-200  hover:text-red ">Home</a>
                     <a href="/shop" class="text-gray-200 hover:text-white transition">Shop</a>
-                    <a href="#" class="text-gray-200 hover:text-white transition">About us</a>
+                    <a href="/cart" class="text-gray-200 hover:text-white transition">Keranjang</a>
                     <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
                 </div>
-                <a href="/login" class="text-gray-200 hover:text-white transition">Login</a>
+
+                @if (Auth::check())
+                    <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+                        <div class="block px-4 py-4 text-gray-200">{{ Auth::user()->name }}</div>
+                        <button @click="isOpen = !isOpen"
+                            class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
+                            <img src="https://source.unsplash.com/uJ8LNVCBjFQ/400x400">
+                        </button>
+                        <button x-show="isOpen" @click="isOpen = false"
+                            class="h-full w-full fixed inset-0 cursor-default"></button>
+                        <div x-show="isOpen" class="absolute w-34 bg-white rounded-lg shadow-lg py-2 mt-16">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="block px-4 py-2 account-link">
+                                    {{ __('Sign Out') }}
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                @else
+                    <div class="flex items-center space-x-6 justify-between">
+                        <a href="/login" class="text-gray-200 hover:text-white transition">Login</a>
+                        <a href="/register" class="text-gray-200 hover:text-white transition">Register</a>
+                    </div>
+                @endif
             </div>
+
         </div>
     </nav>
     @yield('content')
@@ -108,6 +133,8 @@
         integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     @yield('script')
 </body>
 
