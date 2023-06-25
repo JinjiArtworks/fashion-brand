@@ -25,12 +25,20 @@
                     <a href="/" class="text-gray-200  hover:text-red ">Home</a>
                     <a href="/shop" class="text-gray-200 hover:text-white transition">Shop</a>
                     <a href="/cart" class="text-gray-200 hover:text-white transition">Keranjang</a>
-                    <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
+                    <a href="/riwayat-order" class="text-gray-200 hover:text-white transition">Riwayat Order</a>
                 </div>
 
                 @if (Auth::check())
                     <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
-                        <div class="block px-4 py-4 text-gray-200">{{ Auth::user()->name }}</div>
+                        <div class="block px-4 py-4 text-gray-200">
+                            @if (Auth::user()->role == 'staff')
+                                Anda login sebagai : {{ Auth::user()->role }}
+                            @elseif(Auth::user()->role == 'customer')
+                                Member {{ Auth::user()->membership }}. Point : {{ Auth::user()->point }}
+                            @else
+                                Anda login sebagai : {{ Auth::user()->role }}
+                            @endif
+                        </div>
                         <button @click="isOpen = !isOpen"
                             class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
                             <img src="https://source.unsplash.com/uJ8LNVCBjFQ/400x400">
@@ -38,6 +46,9 @@
                         <button x-show="isOpen" @click="isOpen = false"
                             class="h-full w-full fixed inset-0 cursor-default"></button>
                         <div x-show="isOpen" class="absolute w-34 bg-white rounded-lg shadow-lg py-2 mt-16">
+                            @if (Auth::user()->role != 'customer')
+                                <a href="/data-customer" class="block px-4 py-2 text-blue-600">Lihat Toko</a>
+                            @endif
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button class="block px-4 py-2 account-link">

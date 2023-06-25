@@ -38,11 +38,27 @@
                                 Nama Produk
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Deskripsi
+                                Category
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Jenis
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Tipe
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Brand Produk
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Stock
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Dimension
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Harga Produk
                             </th>
+
                             <th scope="col" class="px-6 py-3">
                                 Aksi
                             </th>
@@ -63,7 +79,22 @@
                                     {{ $item->name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $item->description }}
+                                    {{ $item->categories->name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $item->jenis->name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $item->tipe->name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $item->brand }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $item->stock }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $item->dimension }}
                                 </td>
                                 <td class="px-6 py-4">
                                     @currency($item->price)

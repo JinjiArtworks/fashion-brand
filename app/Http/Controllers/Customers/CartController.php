@@ -23,12 +23,14 @@ class CartController extends Controller
     }
     public function addCart(Request $request, $id)
     {
+        $user = Auth::user()->id;
         $product = Product::find($id);
         // return dd($product->dimension);
         $cart = session()->get('cart');
         if (!isset($cart[$id])) {
             // Cart ada isi nya
             $cart[$id] = [
+                "user_id" => $user,
                 "id" => $product->id,
                 "name" => $product->name,
                 "price" => $product->price,

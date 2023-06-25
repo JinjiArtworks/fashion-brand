@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
+use App\Models\Jenis;
 use App\Models\Product;
+use App\Models\Tipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,23 +26,34 @@ class DashboardController extends Controller
 
     public function create()
     {
-        return view('staff.products.create');
+        $product = Product::all();
+        $jenis = Jenis::all();
+        $categories = Categories::all();
+        $tipe = Tipe::all();
+        return view('staff.products.create', compact('product', 'jenis', 'categories', 'tipe'));
     }
     public function store(Request $request)
     {
         $product = Product::create([
             'name' => $request->name,
             'image' => $request->image,
-            'description' => $request->description,
+            'dimension' => $request->dimension,
+            'brand' => $request->brand,
+            'categories_id' => $request->categories,
+            'jenis_id' => $request->jenis,
+            'tipe_id' => $request->tipe,
             'stock' => $request->stock,
             'price' => $request->price,
         ]);
-        return redirect('/dashboard');
+        return redirect('/data-product');
     }
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('staff.products.edit', compact('product'));
+        $jenis = Jenis::all();
+        $categories = Categories::all();
+        $tipe = Tipe::all();
+        return view('staff.products.edit', compact('product', 'jenis', 'categories', 'tipe'));
     }
     public function update(Request $request, $id)
     {
@@ -48,12 +62,16 @@ class DashboardController extends Controller
                 [
                     'name' => $request->name,
                     'image' => $request->image,
-                    'description' => $request->description,
-                    'price' => $request->price,
+                    'dimension' => $request->dimension,
+                    'brand' => $request->brand,
+                    'categories_id' => $request->categories,
+                    'jenis_id' => $request->jenis,
+                    'tipe_id' => $request->tipe,
                     'stock' => $request->stock,
+                    'price' => $request->price,
                 ]
             );
-        return redirect('/dashboard');
+        return redirect('/data-product');
     }
     public function destroy($id)
     {

@@ -19,15 +19,46 @@
                                 <input class="mt-2" accept="image/*" id="image" type="file" name="image"required>
                             </div>
                             <div class="mt-2">
-                                <label class="block text-sm text-gray-600" for="email">Deskripsi</label>
-                                <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="email"
-                                    name="description" type="text" required placeholder="Deskripsi Produk"
-                                    aria-label="Email">
+                                <label class="block text-sm text-gray-600" for="brand">Brand</label>
+                                <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="brand"
+                                    name="brand" type="text" required placeholder="Brand Produk" aria-label="brand">
                             </div>
                             <div class="mt-2">
                                 <label class="block text-sm text-gray-600" for="email">Stock</label>
                                 <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="stock"
                                     name="stock" required placeholder="Stock Produk" type="number">
+                            </div>
+                            <div class="mt-2">
+                                <label class="block text-sm text-gray-600" for="dimension">Dimension</label>
+                                <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="dimension"
+                                    name="dimension" required placeholder="Dimension Produk" type="text">
+                            </div>
+                            <div class="mt-2">
+                                <label class="block text-sm text-gray-600" for="dimension">Kategori</label>
+                                <select class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" name="categories"
+                                    id="">
+                                    @foreach ($categories as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mt-2">
+                                <label class="block text-sm text-gray-600" for="dimension">Jenis</label>
+                                <select class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" name="jenis"
+                                    id="">
+                                    @foreach ($jenis as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mt-2">
+                                <label class="block text-sm text-gray-600" for="dimension">Tipe</label>
+                                <select class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" name="tipe"
+                                    id="">
+                                    @foreach ($tipe as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="mt-2">
                                 <label class="block text-sm text-gray-600" for="email">Harga</label>

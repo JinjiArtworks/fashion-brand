@@ -21,11 +21,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
-        // return dd($customers);
-        // $tr = customers::find('customers_id');
-        // return dd($tr);
-        return view('staff.customers.data-customer', compact('customers'));
+        $users = User::all();
+        return view('staff.customers.data-customer', compact('users'));
     }
     // Add products
 
@@ -47,23 +44,22 @@ class CustomerController extends Controller
     }
     public function edit($id)
     {
-        $customers = Customer::find($id);
-        return view('staff.customers.edit', compact('customers'));
+        $users = User::find($id);
+        return view('staff.customers.edit', compact('users'));
     }
     public function update(Request $request, $id)
     {
-        Customer::where('id', $id)
+        User::where('id', $id)
             ->update(
                 [
-                    'name' => $request->name,
-                    'phone' => $request->phone,
+                    'membership' => $request->membership,
                 ]
             );
         return redirect('/data-customer');
     }
     public function destroy($id)
     {
-        Customer::where('id', $id)->delete();
+        User::where('id', $id)->delete();
         return redirect()->back();
     }
 }

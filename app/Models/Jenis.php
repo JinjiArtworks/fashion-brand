@@ -9,6 +9,7 @@ class Jenis extends Model
 {
     use HasFactory;
     protected $table = 'jenis';
+    protected $guarded = [];
     public function product()
     {
         return $this->hasMany(Product::class);

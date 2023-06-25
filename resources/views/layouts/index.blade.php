@@ -20,19 +20,24 @@
             <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">CRM</a>
         </div>
         <nav class="text-white text-base font-semibold pt-3">
-            <a href="/dashboard" class="flex items-center opacity-75 hover:opacity-100  text-white py-4 pl-6 nav-item">
+            <a href="/data-customer"
+                class="flex items-center opacity-75 hover:opacity-100  text-white py-4 pl-6 nav-item">
                 <i class="fas fa-tachometer-alt mr-3"></i>
-                Data Produk
+                Data Pelanggan
             </a>
-            <a href="/data-transaction"
+            <a href="/data-product"
                 class="flex items-center  opacity-75 hover:opacity-100  text-white py-4 pl-6 nav-item">
                 <i class="fas fa-sticky-note mr-3"></i>
-                Data Transaksi
+                Data Produk
             </a>
-            <a href="/data-customer"
+            <a href="/data-category"
                 class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-sticky-note mr-3"></i>
-                Data Pelanggan
+                Data Kategori
+            </a>
+            <a href="/data-jenis" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-sticky-note mr-3"></i>
+                Data Jenis
             </a>
             @if (Auth::user()->role == 'Owner')
                 <a href="/data-employee"
@@ -156,7 +161,7 @@
     <script defer src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-    
+
     @yield('script')
 </body>
 

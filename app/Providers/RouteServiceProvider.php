@@ -17,6 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    // if(Auth::user())
     public const HOME = '/';
 
     /**

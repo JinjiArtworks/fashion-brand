@@ -24,37 +24,23 @@ class CheckoutController extends Controller
     }
     public function store(Request $request)
     {
-        $user = Auth::user()->id;
-        // return dd($request->all());
+        $user = Auth::user();
         $cart = session()->get('cart');
-        // return dd($cart[$id]['total_after_disc']);
-        // jika misal customers yang sama melakukan transaksi kembali, harusnya pointnya ini bertambah tidak hanya satu saja (next)
-        //    if .......
-        // CUSTOMER DIUBAH, JADI PADA SAAT REGISTER AKUN, DATA CUSTOMER DIGABUNG
-        $customers = new Customer();
-        $customers->user_id = $user;
-        $customers->name = $request->name;
-        // if total > 100rb , dapet point 1 (next)
-        $customers->membership = 'Active';
-        // foreach $total > 100{point}
-        $customers->point = '1';
-        $saved =  $customers->save();
-
         $orders = new Order();
         $orders->date = Carbon::now();
-        $orders->total = 40000; // blum benar
-        $orders->customer_id = $user;
+        $orders->total = $request->grandTotal;
+        $orders->user_id = $user->id;
         $orders->status = 'Sedang Diproses';
         $saved =  $orders->save();
         foreach ($cart as $item) {
             $details = new OrderDetail();
             $details->product_id = $item['id'];
             $details->order_id = $orders->id;
-            $details->name = $request['name'];
-            $details->alamat = $request['address'];
-            $details->phone = $request['phone'];
+            $details->name = $user->name;
+            $details->alamat = $user->address;
+            $details->phone = $user->phone;
             $details->quantity = $item['quantity'];
-            $details->price = $item['price'];
+            $details->price = $item['price'] * $item['quantity'];
             $details->save();
             $product = Product::find($item['id']);
             $product::where('id', $item['id'])
@@ -63,7 +49,14 @@ class CheckoutController extends Controller
                         'stock' => $product["stock"] - $item["quantity"],
                     ]
                 );
-            // coba update customer pointnya nembak id
+            $user = User::find($item['user_id']);
+            $user::where('id', $item['user_id'])
+                ->update(
+                    [
+                        'point' => $user["point"] + 1,
+                        'membership' => 'Active'
+                    ]
+                );
         }
 
         if (!$saved) {
