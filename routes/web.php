@@ -9,6 +9,7 @@ use App\Http\Controllers\Staff\CategoryController;
 use App\Http\Controllers\Staff\CustomerController;
 use App\Http\Controllers\Staff\DashboardController;
 use App\Http\Controllers\Staff\JenisController;
+use App\Http\Controllers\Staff\TipeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -55,6 +56,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store-jenis', [JenisController::class, 'store'])->name('store');
         Route::put('/update-jenis/{id}', [JenisController::class, 'update'])->name('update');
         Route::get('/delete-jenis/{id}', [JenisController::class, 'destroy'])->name('delete');
+    });
+    Route::group(['as' => 'tipe.'], function () {
+        Route::get('/data-tipe', [TipeController::class, 'index']);
+        Route::get('/create-tipe', [TipeController::class, 'create'])->name('create');
+        Route::get('/edit-tipe/{id}', [TipeController::class, 'edit'])->name('edit');
+        Route::post('/store-tipe', [TipeController::class, 'store'])->name('store');
+        Route::put('/update-tipe/{id}', [TipeController::class, 'update'])->name('update');
+        Route::get('/delete-tipe/{id}', [TipeController::class, 'destroy'])->name('delete');
     });
     Route::group(['as' => 'staff.'], function () {
         Route::get('/data-product', [DashboardController::class, 'index'])->name('dashboard');

@@ -27,7 +27,7 @@
                 <div class="bg-white shadow rounded overflow-hidden group">
                     <div class="relative">
                         <a href="/detail-product/{{ $item->id }}">
-                            <img src="assets/images/products/product1.jpg" alt="product 1" class="w-full">
+                            <img src="{{ asset('img/'.$item->image) }}" alt="product 1" class="w-full">
                         </a>
                     </div>
                     <div class="pt-4 pb-3 px-4">
@@ -35,9 +35,10 @@
                             <h4 class=" font-medium text-xl text-gray-800 hover:text-primary transition">
                                 {{ $item->name }} - {{ $item->brand }}</h4>
                         </a>
-                        <p class="text-sm text-gray-500 transition  mb-3">{{ $item->categories->name }}
+                        <p class="text-sm text-gray-500 transition  mb-3">Kategori : {{ $item->categories->name }}
                             <br>
                             <small>Stock : {{ $item->stock }} pcs</small>
+                            <br>
                             <small>Tipe : {{ $item->tipe->name }} </small>
                         </p>
                         <div class="flex items-baseline mb-1 space-x-2">

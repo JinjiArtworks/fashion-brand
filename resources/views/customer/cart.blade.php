@@ -30,7 +30,7 @@
                     <div class="col-span-12 space-y-4">
                         <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
                             <div class="w-28">
-                                <img src="{{ $c['image'] }}" alt="product 6" class="w-full">
+                                <img src="{{ asset('img/'.$c['image']) }}" alt="product 6" class="w-full">
                             </div>
                             <div class="w-1/3">
                                 <h2 class="text-gray-800 text-xl font-medium uppercase">{{ $c['name'] }}</h2>

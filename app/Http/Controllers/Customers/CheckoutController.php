@@ -18,9 +18,10 @@ class CheckoutController extends Controller
     {
         // dd($request->courier);
         $user = Auth::user()->id;
+        $point = Auth::user()->point;
         $cart = session()->get('cart');
         // return dd($cart);
-        return view('customer.checkout',  compact('cart'));
+        return view('customer.checkout',  compact('cart', 'point'));
     }
     public function store(Request $request)
     {
@@ -32,6 +33,59 @@ class CheckoutController extends Controller
         $orders->user_id = $user->id;
         $orders->status = 'Sedang Diproses';
         $saved =  $orders->save();
+        // dd($user->point);
+        // $user = User::find($user->id);
+        // dd($request->all());
+
+        // $getMaxPoint = round($request->total/100000); 
+        // if ($request->redemption == "Yes" && $user->point >= $getMaxPoint)
+        // {
+        //     $usedPoint = $user->point - $getMaxPoint;
+        //     ($request->total - ($usedPoint * 100000)) + 100000;
+        // } else {
+        //     if ($request->total >= 100000) {
+        //         $getPoint = round($request->total / 100000);
+        //         // dd($getPoint);
+        //         User::where('id', $user->id)
+        //             ->update(
+        //                 [
+        //                     'point' => $user->point + $getPoint,
+        //                     'membership' => 'Active'
+        //                 ]
+        //             );
+        //     } else {
+        //         $getPoint = 0;
+        //         User::where('id', $user->id)
+        //             ->update(
+        //                 [
+        //                     'point' => $user->point + $getPoint,
+        //                     'membership' => 'Active'
+        //                 ]
+        //             );
+        //     }
+        // }`
+
+
+        if ($request->total >= 100000) {
+            $getPoint = round($request->total / 100000);
+            // dd($getPoint);
+            User::where('id', $user->id)
+                ->update(
+                    [
+                        'point' => $user->point + $getPoint,
+                        'membership' => 'Active'
+                    ]
+                );
+        } else {
+            $getPoint = 0;
+            User::where('id', $user->id)
+                ->update(
+                    [
+                        'point' => $user->point + $getPoint,
+                        'membership' => 'Active'
+                    ]
+                );
+        }
         foreach ($cart as $item) {
             $details = new OrderDetail();
             $details->product_id = $item['id'];
@@ -47,14 +101,6 @@ class CheckoutController extends Controller
                 ->update(
                     [
                         'stock' => $product["stock"] - $item["quantity"],
-                    ]
-                );
-            $user = User::find($item['user_id']);
-            $user::where('id', $item['user_id'])
-                ->update(
-                    [
-                        'point' => $user["point"] + 1,
-                        'membership' => 'Active'
                     ]
                 );
         }

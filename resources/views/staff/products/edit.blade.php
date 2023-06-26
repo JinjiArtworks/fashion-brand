@@ -7,7 +7,7 @@
                 <div class="w-full lg:w-12/12 my-6 pr-0 lg:pr-2">
                     <div class="leading-loose">
                         <form class="p-10 bg-white rounded shadow-xl" method="POST"
-                            action="{{ route('staff.update', ['id' => $product->id]) }}">
+                            action="{{ route('staff.update', ['id' => $product->id]) }}" enctype="multipart/form-data">
                             @csrf
                             {{ method_field('put') }}
 

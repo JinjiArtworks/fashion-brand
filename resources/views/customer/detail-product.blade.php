@@ -12,7 +12,7 @@
         @csrf
         <div class="container grid grid-cols-2 gap-6">
             <div>
-                <img src="../assets/images/products/product1.jpg" alt="product" class="w-full">
+                <img src="{{ asset('img/' . $products->image) }}" alt="product" class="w-full">
             </div>
             <div>
                 <h2 class="text-3xl font-medium uppercase mb-2"> {{ $products->name }}
@@ -63,7 +63,7 @@
                     </div>
                     <div class="my-10">
                         <button type="submit"
-                            class="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition">Masukkan
+                            class="add-to-cart bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition">Masukkan
                             Keranjang</button>
                     </div>
                 </div>
@@ -78,19 +78,24 @@
                 $('.count').val(parseInt($('.count').val()) + 1);
                 // alert('test');
                 // alert('asd');
-                // if ($('.count').val() > {{ $products->stock }}) {
-                //     $(':input[type="submit"]').prop('disabled', true);
-
-                // }
+                if ($('.count').val() > {{ $products->stock }}) {
+                    $(':input[type="submit"]').prop('disabled', true);
+                }
             });
             $(document).on('click', '.btn-reduce', function() {
                 $('.count').val(parseInt($('.count').val()) - 1);
                 if ($('.count').val() == 0) {
                     $('.count').val(1);
                 }
-                // if ($('.count').val() <= {{ $products->stock }}) {
-                //     $(':input[type="submit"]').prop('disabled', false);
-                // }
+                if ($('.count').val() <= {{ $products->stock }}) {
+                    $(':input[type="submit"]').prop('disabled', false);
+                }
+            });
+            $(document).on('click', '.add-to-cart', function() {
+                if ($('.count').val() > {{ $products->stock }}) {
+                    event.preventDefault();
+                    alert('stock tidak tersedia');
+                }
             });
         });
     </script>

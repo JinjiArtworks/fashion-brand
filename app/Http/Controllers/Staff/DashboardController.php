@@ -34,9 +34,11 @@ class DashboardController extends Controller
     }
     public function store(Request $request)
     {
+        $destinationPath = '/img';
+        $request->image->move(public_path($destinationPath), $request->image->getClientOriginalName());
         $product = Product::create([
             'name' => $request->name,
-            'image' => $request->image,
+            'image' => $request->image->getClientOriginalName(),
             'dimension' => $request->dimension,
             'brand' => $request->brand,
             'categories_id' => $request->categories,
@@ -57,11 +59,13 @@ class DashboardController extends Controller
     }
     public function update(Request $request, $id)
     {
+        $destinationPath = '/img';
+        $request->image->move(public_path($destinationPath), $request->image->getClientOriginalName());
         Product::where('id', $id)
             ->update(
                 [
                     'name' => $request->name,
-                    'image' => $request->image,
+                    'image' => $request->image->getClientOriginalName(),
                     'dimension' => $request->dimension,
                     'brand' => $request->brand,
                     'categories_id' => $request->categories,
