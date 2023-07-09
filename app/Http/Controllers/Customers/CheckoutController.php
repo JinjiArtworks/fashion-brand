@@ -32,7 +32,7 @@ class CheckoutController extends Controller
         $orders->total = $request->grandTotal;
         $orders->user_id = $user->id;
         $orders->status = 'Sedang Diproses';
-        $saved =  $orders->save();
+        $saved = $orders->save();
         // dd($user->point);
         // $user = User::find($user->id);
         // dd($request->all());
@@ -64,8 +64,6 @@ class CheckoutController extends Controller
         //             );
         //     }
         // }`
-
-
         if ($request->total >= 100000) {
             $getPoint = round($request->total / 100000);
             // dd($getPoint);
@@ -101,6 +99,7 @@ class CheckoutController extends Controller
                 ->update(
                     [
                         'stock' => $product["stock"] - $item["quantity"],
+                        'terjual' => $product["terjual"] + $item["quantity"],
                     ]
                 );
         }

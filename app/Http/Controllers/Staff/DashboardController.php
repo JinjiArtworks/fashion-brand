@@ -7,8 +7,8 @@ use App\Models\Categories;
 use App\Models\Jenis;
 use App\Models\Product;
 use App\Models\Tipe;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -20,7 +20,10 @@ class DashboardController extends Controller
     public function index()
     {
         $product = Product::all();
-        return view('staff.products.data-product', compact('product'));
+        $sort3 = Product::orderBy('terjual', 'DESC')->paginate(3);
+        // return dd($sort3);
+        // return dd($sortUser);
+        return view('staff.products.data-product', compact('product','sort3'));
     }
     // Add products
 
@@ -34,19 +37,21 @@ class DashboardController extends Controller
     }
     public function store(Request $request)
     {
-        $destinationPath = '/img';
-        $request->image->move(public_path($destinationPath), $request->image->getClientOriginalName());
-        $product = Product::create([
-            'name' => $request->name,
-            'image' => $request->image->getClientOriginalName(),
-            'dimension' => $request->dimension,
-            'brand' => $request->brand,
-            'categories_id' => $request->categories,
-            'jenis_id' => $request->jenis,
-            'tipe_id' => $request->tipe,
-            'stock' => $request->stock,
-            'price' => $request->price,
-        ]);
+        if ($request->image != null) {
+            $destinationPath = '/img';
+            $request->image->move(public_path($destinationPath), $request->image->getClientOriginalName());
+            $product = Product::create([
+                'name' => $request->name,
+                'image' => $request->image->getClientOriginalName(),
+                'dimension' => $request->dimension,
+                'brand' => $request->brand,
+                'categories_id' => $request->categories,
+                'jenis_id' => $request->jenis,
+                'tipe_id' => $request->tipe,
+                'stock' => $request->stock,
+                'price' => $request->price,
+            ]);
+        }
         return redirect('/data-product');
     }
     public function edit($id)

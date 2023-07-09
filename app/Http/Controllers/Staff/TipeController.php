@@ -12,12 +12,12 @@ class TipeController extends Controller
     public function index()
     {
         $tipe = Tipe::all();
-        return view('staff.jenis.data-jenis', compact('tipe'));
+        return view('staff.tipe.data-tipe', compact('tipe'));
     }
 
     public function create()
     {
-        return view('staff.jenis.create');
+        return view('staff.tipe.create');
     }
 
     public function store(Request $request)
@@ -25,13 +25,13 @@ class TipeController extends Controller
         Tipe::create([
             'name' => $request->name,
         ]);
-        return redirect('/data-jenis');
+        return redirect('/data-tipe');
     }
 
     public function edit($id)
     {
         $tipe = Tipe::find($id);
-        return view('staff.jenis.edit', compact('tipe'));
+        return view('staff.tipe.edit', compact('tipe'));
     }
 
     public function update(Request $request, $id)
@@ -41,7 +41,7 @@ class TipeController extends Controller
                     'name' => $request->name,
                 ]
             );
-        return redirect('/data-jenis');
+        return redirect('/data-tipe');
     }
     
     public function destroy($id)

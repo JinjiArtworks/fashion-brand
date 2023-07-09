@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Customers;
 use App\Models\Employee;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\User;
@@ -22,7 +23,12 @@ class CustomerController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('staff.customers.data-customer', compact('users'));
+        $sortUser = User::orderBy('point', 'DESC')->get();
+        $getTotal = Order::whereUserId(8)->get('total');
+        // $test = Order::all();
+        // return dd($test->user->name);
+        // return dd($getTotal);
+        return view('staff.customers.data-customer', compact('users','sortUser'));
     }
     // Add products
 

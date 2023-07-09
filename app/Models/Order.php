@@ -10,9 +10,9 @@ class Order extends Model
     use HasFactory;
     protected $guarded = ['id'];
     protected $table = 'orders';
-    public function customer()
+    public function user()
     {
-        return $this->hasMany(Customer::class);
+        return $this->belongsTo(User::class);
     }
     public function orderdetail()
     {

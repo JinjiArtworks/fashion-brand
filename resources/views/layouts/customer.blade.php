@@ -69,7 +69,6 @@
         </div>
     </nav>
     @yield('content')
-
     <!-- footer -->
     <footer class="bg-white pt-16 pb-12 border-t border-gray-100">
         <div class="container grid grid-cols-1 ">

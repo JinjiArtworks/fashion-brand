@@ -32,7 +32,8 @@
                 <div class="bg-white shadow rounded overflow-hidden group">
                     <div class="relative">
                         <a href="/detail-product/{{ $item->id }}">
-                            <img src="assets/images/products/product1.jpg" alt="product 1" class="w-full">
+                            <img src="{{ asset('img/'.$item->image) }}" alt="product 1" class="w-full">
+
                         </a>
                     </div>
                     <div class="pt-4 pb-3 px-4">

@@ -9,7 +9,9 @@ class Tipe extends Model
 {
     use HasFactory;
     protected $table = 'tipe';
-
+    protected $guard = ['id'];
+    protected $fillable = ['name'];
+    
     public function product()
     {
         return $this->hasMany(Product::class);

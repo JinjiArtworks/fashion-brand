@@ -12,7 +12,6 @@
             // echo $grandTotal;
         }
     @endphp
-
     <!-- wrapper -->
     <form method="POST" action="{{ route('checkout.store') }}" enctype="multipart/form-data">
         @csrf
@@ -42,14 +41,14 @@
                     <p>@currency($total)</p>
                 </div>
 
-                <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
+                {{-- <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                     <p>Redemption</p>
                     <select name="point" id="">
                         <option value="Yes">Pakai Point</option>
                         <option value="No">Tidak Pakai Point</option>
                     </select>
                   
-                </div>
+                </div> --}}
                 <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                     <p>Tax</p>
                     <p>@currency($afterTax) (11%)</p>

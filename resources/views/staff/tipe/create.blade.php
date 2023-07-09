@@ -11,7 +11,7 @@
                             <div class="mt-2">
                                 <label class="block text-sm text-gray-600" for="name">Nama Tipe </label>
                                 <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="name"
-                                    name="name" type="text" required placeholder="Nama Tipe "
+                                    name="name" type="text" required placeholder="Nama Tipe"
                                     aria-label="name">
                             </div>
                             <div class="mt-6">

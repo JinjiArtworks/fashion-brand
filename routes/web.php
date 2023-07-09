@@ -75,48 +75,4 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-// Route::post('/add-to-cart/{id}', 'CartController@addToCart')->middleware('auth')->name('cart.add');
-// Route::get('/remove-from-cart/{id}', 'CartController@removeFromCart');
-// Route::get('/cart', 'CartController@cart')->middleware('auth');
-
-
-// FOR ADMIN ONLY
-// Route::middleware(['auth'])->group(function () {
-   
-//     Route::group(['as' => 'transaction.'], function () {
-//         Route::get('/data-transaction', [TransactionController::class, 'index']);
-//         Route::get('/create-transaction', [TransactionController::class, 'create'])->name('create');
-//         Route::get('/edit-transaction/{id}', [TransactionController::class, 'edit'])->name('edit');
-//         Route::post('/store-transaction', [TransactionController::class, 'store'])->name('store');
-//         Route::put('/update-transaction/{id}', [TransactionController::class, 'update'])->name('update');
-//         Route::get('/delete-transaction/{id}', [TransactionController::class, 'destroy'])->name('delete');
-//     });
-
-//     Route::group(['as' => 'employees.'], function () {
-//         Route::get('/data-employee', [EmployeeController::class, 'index']);
-//         Route::get('/create-employee', [EmployeeController::class, 'create'])->name('create');
-//         Route::get('/edit-employee/{id}', [EmployeeController::class, 'edit'])->name('edit');
-//         Route::post('/store-employee', [EmployeeController::class, 'store'])->name('store');
-//         Route::put('/update-employee/{id}', [EmployeeController::class, 'update'])->name('update');
-//         Route::get('/delete-employee/{id}', [EmployeeController::class, 'destroy'])->name('delete');
-//     });
-//     Route::group(['as' => 'faq.'], function () {
-//         Route::get('/data-faqs', [FaqListController::class, 'index']);
-//         Route::get('/create-faq', [FaqListController::class, 'create'])->name('create');
-//         Route::get('/edit-faq/{id}', [FaqListController::class, 'edit'])->name('edit');
-//         Route::post('/store-faq', [FaqListController::class, 'store'])->name('store');
-//         Route::put('/update-faq/{id}', [FaqListController::class, 'update'])->name('update');
-//         Route::get('/delete-faq/{id}', [FaqListController::class, 'destroy'])->name('delete');
-//     });
-// });
 require __DIR__ . '/auth.php';
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
-
-// require __DIR__.'/auth.php';
